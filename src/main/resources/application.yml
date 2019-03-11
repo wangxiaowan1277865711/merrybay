@@ -10,7 +10,5 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-#    hibernate:
-#      ddl-auto: create             #根据实体自动建表
   thymeleaf:
     prefix: /WEB-INF/view/

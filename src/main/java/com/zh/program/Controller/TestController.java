@@ -1,5 +1,6 @@
 package com.zh.program.Controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Dao.UserDao;
@@ -46,5 +47,11 @@ public class TestController {
     public String findByName(String name){
         User user = userDao.findByName(name);
         return JSONObject.toJSONString(user);
+    }
+    @ResponseBody
+    @RequestMapping("query")
+    public String query(String name){
+        List<User> list = userDao.query(name);
+        return JSONObject.toJSONString(list);
     }
 }
