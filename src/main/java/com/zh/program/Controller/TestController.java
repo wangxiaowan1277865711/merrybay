@@ -1,5 +1,6 @@
 package com.zh.program.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Dao.UserDao;
 import com.zh.program.Entrty.User;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class TestController {
@@ -32,5 +34,17 @@ public class TestController {
         user.setPassword("123");
         userDao.save(user);
         return "true" + str;
+    }
+    @ResponseBody
+    @RequestMapping("get")
+    public String get(){
+        List<User> list = userDao.findAll();
+        return JSONObject.toJSONString(list);
+    }
+    @ResponseBody
+    @RequestMapping("findByName")
+    public String findByName(String name){
+        User user = userDao.findByName(name);
+        return JSONObject.toJSONString(user);
     }
 }
