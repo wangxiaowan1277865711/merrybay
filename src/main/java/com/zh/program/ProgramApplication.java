@@ -1,6 +1,7 @@
 package com.zh.program;
 
 import com.zh.program.Intercaptor.Intercaptor;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 @ServletComponentScan
 @EnableScheduling
+@MapperScan("com.zh.program.Dao")
 public class ProgramApplication {
 
     public static void main(String[] args) {
