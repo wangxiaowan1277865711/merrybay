@@ -8,7 +8,7 @@ import java.util.Map;
  * 
  * @author: autogeneration
  * @date: 2019-04-01 14:20:13
- **/ 
+ **/
 public interface UserService {
     /**
      * 添加
@@ -81,4 +81,6 @@ public interface UserService {
      * @date: 2019-04-01 14:20:13
      **/ 
     int selectCount(Map<Object, Object> param);
+
+    List<User> findAll();
 }

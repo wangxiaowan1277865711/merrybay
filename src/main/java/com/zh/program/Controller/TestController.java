@@ -1,6 +1,7 @@
 package com.zh.program.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Entrty.User;
 import com.zh.program.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +27,12 @@ public class TestController {
         return "index.html";
     }
 
-/*    @ResponseBody
-    @RequestMapping("str")
-    public String test(String str){
-        RedisUtil.addString(redis, "test:" + str, str);
-        User user = new User();
-        user.setName("aaa");
-        user.setPassword("123");
-        userDao.save(user);
-        return "true" + str;
-    }
     @ResponseBody
     @RequestMapping("get")
     public String get(){
-        List<User> list = userDao.findAll();
+        List<User> list = userService.findAll();
         return JSONObject.toJSONString(list);
-    }*/
+    }
     @ResponseBody
     @RequestMapping("get1")
     public String get1(){
