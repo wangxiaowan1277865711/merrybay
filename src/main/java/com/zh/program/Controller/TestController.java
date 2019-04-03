@@ -1,6 +1,7 @@
 package com.zh.program.Controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zh.program.Common.authorization.annotation.Decrypt;
 import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Entrty.User;
 import com.zh.program.Service.UserService;
@@ -27,6 +28,7 @@ public class TestController {
         return "index.html";
     }
 
+    @Decrypt
     @ResponseBody
     @RequestMapping("get")
     public String get(){
