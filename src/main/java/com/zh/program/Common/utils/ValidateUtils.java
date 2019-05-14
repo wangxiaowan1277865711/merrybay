@@ -40,6 +40,15 @@ public class ValidateUtils {
         String regexTradePwd = "^\\d{6}$";
         return verificationCode.matches(regexTradePwd);
     }
+
+    /** 验证邮箱格式是否正确*/
+    public static boolean isEmail(String userEmail){
+        if (StrUtils.isBlank(userEmail)){
+            return false;
+        }
+        String email ="^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$";
+        return userEmail.matches(email);
+    }
     
     
     public static String replacePwdOfLog(String str){

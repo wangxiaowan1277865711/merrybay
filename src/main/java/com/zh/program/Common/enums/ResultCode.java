@@ -9,6 +9,7 @@ public enum ResultCode {
     PARAM_IS_INVALID(10001, "参数无效"),
     PARAM_IS_BLANK(10002, "参数为空"),
     PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
+    PARAM_TYPE_BIND_ERROQ(10003, "参数不能为空"),
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录"),
@@ -17,12 +18,15 @@ public enum ResultCode {
     USER_NOT_EXIST(20004, "用户不存在"),
     USER_HAS_EXISTED(20005, "用户已存在"),
     USER_ACCOUNT_LOGOFF(20006, "账号已被注销"),
-    USER_NOT_REALNAME(20007, "用户未实名"),
+    //USER_NOT_REALNAME(20007, "用户未实名"),
+    USER_NOT_REALNAME(20007, "姓名不能为空"),
 
     /* 业务错误：30001-39999 */
     SMS_INTERFACE_ERROR(30001, "短信接口异常"),
-    SMS_FREQUENT_SEND(30002, "手机号频繁限制"),
-    SMS_CHECK_ERROR(30003, "验证码错误"),
+    //SMS_FREQUENT_SEND(30002, "手机号频繁限制"),
+    SMS_FREQUENT_SEND(30002, "手机号码不能为空"),
+   // SMS_CHECK_ERROR(30003, "验证码错误"),
+    SMS_CHECK_ERROR(30003, "手机号码格式错误"),
     SMS_TIME_LIMIT_ERROR(30004, "验证码已过期"),
     SMS_COUNTS_LIMIT_ERROR(30005, "验证码使用超出次数限制"),
 
@@ -33,7 +37,8 @@ public enum ResultCode {
     /* 数据错误：50001-599999 */
     RESULE_DATA_NONE(50001, "数据未找到"),
     DATA_ALREADY_EXISTED(50002, "数据已存在"),
-    UPDATE_DATA_NOT_EXIST(50003, "数据无更新"),
+    //UPDATE_DATA_NOT_EXIST(50003, "数据无更新"),
+    UPDATE_DATA_NOT_EXIST(50003, "邮箱格式错误"),
 
     /* 接口错误：60001-69999 */
     INTERFACE_SIGN_ERROR(60001,"接口签名认证错误"),
