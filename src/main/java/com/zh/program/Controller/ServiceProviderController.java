@@ -21,17 +21,22 @@ public class ServiceProviderController {
     @Autowired
     private ServiceProviderService sps;
 
-    @ResponseBody
-    @RequestMapping("/list")
+    @RequestMapping("/type")
     public String getType(Integer type){
-        if (type ==1){
-            return
+        if(!"".equals(type) && type != null){
+            if (type == 0){
+                return "app.html";
+            }else if (type == 1){
+                return "wangzhan.html";
+            }else if (type == 2){
+                return "weixin.html";
+            }
         }
         return "";
     }
 
     /**
-     * 获取服务类型 0:APP开发,1:网站建设,2:微信小程序
+     * 获取服务类型案例 0:APP开发,1:网站建设,2:微信小程序
      */
     @ResponseBody
     @RequestMapping("/list")
