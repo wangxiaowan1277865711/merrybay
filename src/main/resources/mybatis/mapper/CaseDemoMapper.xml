@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.program.Dao.CaseDemoMapper">
+  <resultMap id="BaseResultMap" type="com.zh.program.Entrty.CaseDemo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="img_link" jdbcType="VARCHAR" property="imgLink" />
+    <result column="aa" jdbcType="INTEGER" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, service_id, details, img_link, aa, bb, create_time, update_time, title, describe
+  </sql>
+  <insert id="insert" parameterType="com.zh.program.Entrty.CaseDemo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_demo (service_id, details, img_link, 
+      aa, bb, create_time, 
+      update_time, title, describe
+      )
+    values (#{serviceId,jdbcType=INTEGER}, #{details,jdbcType=VARCHAR}, #{imgLink,jdbcType=VARCHAR}, 
+      #{aa,jdbcType=INTEGER}, #{bb,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.program.Entrty.CaseDemo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into case_demo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="imgLink != null">
+        img_link,
+      </if>
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLink != null">
+        #{imgLink,jdbcType=VARCHAR},
+      </if>
+      <if test="aa != null">
+        #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zh.program.Entrty.CaseDemo">
+    update case_demo
+    set service_id = #{serviceId,jdbcType=INTEGER},
+      details = #{details,jdbcType=VARCHAR},
+      img_link = #{imgLink,jdbcType=VARCHAR},
+      aa = #{aa,jdbcType=INTEGER},
+      bb = #{bb,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.CaseDemo">
+    update case_demo
+    <set>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLink != null">
+        img_link = #{imgLink,jdbcType=VARCHAR},
+      </if>
+      <if test="aa != null">
+        aa = #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from case_demo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id,title,service_id,details from case_demo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from case_demo
+    where 1=1 
+    <if test="serviceId != null">
+       and  service_id = #{serviceId,jdbcType=INTEGER}
+    </if>
+    <if test="details != null">
+       and  details = #{details,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="describe != null">
+       and  describe = #{describe,jdbcType=VARCHAR}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from case_demo
+    where 1=1 
+    <if test="serviceId != null">
+       and  service_id = #{serviceId,jdbcType=INTEGER}
+    </if>
+    <if test="details != null">
+       and  details = #{details,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="describe != null">
+       and  describe = #{describe,jdbcType=VARCHAR}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from case_demo 
+    where 1=1 
+    <if test="serviceId != null">
+       and  service_id = #{serviceId,jdbcType=INTEGER}
+    </if>
+    <if test="details != null">
+       and  details = #{details,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="describe != null">
+       and  describe = #{describe,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="selectType" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select id, service_id, details, img_link, aa, bb, create_time, update_time, title, cs.describe from case_demo cs  where 1=1
+  </select>
+
+  <select id="selectRecommendCase" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select id,title,service_id,img_link from case_demo order by update_time desc limit 0,3;
+  </select>
+</mapper>

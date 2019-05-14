@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.program.Dao.CompanyinformationMapper">
+  <resultMap id="BaseResultMap" type="com.zh.program.Entrty.Companyinformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="welfare" jdbcType="VARCHAR" property="welfare" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="aa" jdbcType="INTEGER" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, company_name, phone, email, welfare, address, aa, bb, create_time, update_time
+  </sql>
+  <insert id="insert" parameterType="com.zh.program.Entrty.Companyinformation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into companyinformation (company_name, phone, email, 
+      welfare, address, aa, 
+      bb, create_time, update_time
+      )
+    values (#{companyName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{welfare,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{aa,jdbcType=INTEGER}, 
+      #{bb,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.program.Entrty.Companyinformation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into companyinformation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="welfare != null">
+        welfare,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="welfare != null">
+        #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="aa != null">
+        #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zh.program.Entrty.Companyinformation">
+    update companyinformation
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      welfare = #{welfare,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      aa = #{aa,jdbcType=INTEGER},
+      bb = #{bb,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Companyinformation">
+    update companyinformation
+    <set>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="welfare != null">
+        welfare = #{welfare,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="aa != null">
+        aa = #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from companyinformation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from companyinformation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from companyinformation
+    where 1=1 
+    <if test="companyName != null">
+       and  company_name = #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null">
+       and  email = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="welfare != null">
+       and  welfare = #{welfare,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from companyinformation
+    where 1=1 
+    <if test="companyName != null">
+       and  company_name = #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null">
+       and  email = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="welfare != null">
+       and  welfare = #{welfare,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from companyinformation 
+    where 1=1 
+    <if test="companyName != null">
+       and  company_name = #{companyName,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null">
+       and  email = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="welfare != null">
+       and  welfare = #{welfare,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.program.Dao.BannerMapper">
+  <resultMap id="BaseResultMap" type="com.zh.program.Entrty.Banner">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="img_name" jdbcType="VARCHAR" property="imgName" />
+    <result column="img_link" jdbcType="VARCHAR" property="imgLink" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="aa" jdbcType="INTEGER" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, img_name, img_link, link, create_time, update_time, aa, bb
+  </sql>
+  <insert id="insert" parameterType="com.zh.program.Entrty.Banner">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into banner (img_name, img_link, link, 
+      create_time, update_time, aa, 
+      bb)
+    values (#{imgName,jdbcType=VARCHAR}, #{imgLink,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{aa,jdbcType=INTEGER}, 
+      #{bb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.program.Entrty.Banner">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imgName != null">
+        img_name,
+      </if>
+      <if test="imgLink != null">
+        img_link,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imgName != null">
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLink != null">
+        #{imgLink,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aa != null">
+        #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zh.program.Entrty.Banner">
+    update banner
+    set img_name = #{imgName,jdbcType=VARCHAR},
+      img_link = #{imgLink,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      aa = #{aa,jdbcType=INTEGER},
+      bb = #{bb,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Banner">
+    update banner
+    <set>
+      <if test="imgName != null">
+        img_name = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgLink != null">
+        img_link = #{imgLink,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aa != null">
+        aa = #{aa,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where 1=1 
+    <if test="imgName != null">
+       and  img_name = #{imgName,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="link != null">
+       and  link = #{link,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where 1=1 
+    <if test="imgName != null">
+       and  img_name = #{imgName,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="link != null">
+       and  link = #{link,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from banner 
+    where 1=1 
+    <if test="imgName != null">
+       and  img_name = #{imgName,jdbcType=VARCHAR}
+    </if>
+    <if test="imgLink != null">
+       and  img_link = #{imgLink,jdbcType=VARCHAR}
+    </if>
+    <if test="link != null">
+       and  link = #{link,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="aa != null">
+       and  aa = #{aa,jdbcType=INTEGER}
+    </if>
+    <if test="bb != null">
+       and  bb = #{bb,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>
