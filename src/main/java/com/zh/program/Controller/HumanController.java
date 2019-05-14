@@ -7,6 +7,7 @@ import com.zh.program.Service.HumanService;
 import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,11 +28,10 @@ public class HumanController {
      * category 岗位类型 0:技术,1:销售,2:行政
      * @return
      */
-    @ResponseBody
     @RequestMapping("/list")
-    public String getAll(Integer category){
+    public String getAll(Integer category, Model model){
         if (category == null){
-            return Result.toResult(ResultCode.PARAM_IS_BLANK);
+            category = 0;
         }
         Map<Object, Object> map = new HashMap<>();
         map.put("category", category);
@@ -52,6 +52,7 @@ public class HumanController {
             human.setJobsRequire(list.getJobsRequire());
             humans.add(human);
         }
-        return Result.toResult(ResultCode.SUCCESS,humans);
+        model.addAttribute("human", humans);
+        return "5zhaopin.html";
     }
 }
